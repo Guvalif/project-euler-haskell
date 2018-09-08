@@ -3,9 +3,7 @@ factors n = [ x | x <- [1..n], n `mod` x == 0 ]
 
 factorization :: Integer -> [Integer]
 factorization 1 = []
-factorization x = y : factorization (x `div` y)
-    where
-        y = (factors x) !! 1
+factorization n = let x = (factors n) !! 1 in x : factorization (n `div` x)
 
 answer = maximum $ factorization 600851475143
 
