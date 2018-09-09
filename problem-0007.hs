@@ -1,17 +1,14 @@
--- This program runs too slow! It should be refactored X(
-
-factors :: Integer -> [Integer]
-factors n = [ x | x <- [ 2 .. n - 1 ], n `mod` x == 0 ]
-
-
-is_prime :: Integer -> Bool
-is_prime n = case factors n of
-    []     -> True
-    x : xs -> False
+isPrime :: Integer -> Bool
+isPrime n =
+    let sieve n'
+            | n' * n' > n     = True
+            | n `rem` n' == 0 = False
+            | otherwise       = sieve (n' + if n' == 2 then 1 else 2)
+    in sieve 2
 
 
-primes = filter is_prime [ 2.. ]
-answer = head . drop 10000 $ primes
+primes = filter isPrime [ 2.. ]
+answer = primes !! 10001
 
 
 -- Application Entry Point
