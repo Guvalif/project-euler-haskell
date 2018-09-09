@@ -1,13 +1,13 @@
 factors :: Integer -> [Integer]
-factors n = [ x | x <- [1..n], n `mod` x == 0 ]
+factors n = [ x | x <- [ 1 .. n ], n `mod` x == 0 ]
 
 
-factorization :: Integer -> [Integer]
-factorization 1 = []
-factorization n = let x = (factors n) !! 1 in x : factorization (n `div` x)
+factorize :: Integer -> [Integer]
+factorize 1 = []
+factorize n = let x = (factors n) !! 1 in x : factorize (n `div` x)
 
 
-answer = maximum $ factorization 600851475143
+answer = maximum $ factorize 600851475143
 
 
 -- Application Entry Point
