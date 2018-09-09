@@ -7,7 +7,7 @@ isPrime n =
     in sieve 2
 
 
-primes = filter isPrime [ 2.. ]
+primes = filter isPrime [ 2 .. ]
 answer = primes !! 10001
 
 
