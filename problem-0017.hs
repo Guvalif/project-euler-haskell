@@ -1,6 +1,5 @@
 word :: Int -> String
 word n
-    | n == 0             = ""
     | 0 < n && n <= 12   = words_1_to_12 !! (n - 1)
     | 12 < n && n <= 19  = (words_modify !! ((n `mod` 10) - 2)) ++ "teen"
     | 19 < n && n <= 99  = (words_modify' !! ((n `div` 10) - 2)) ++ "ty" ++ word (n `mod` 10)

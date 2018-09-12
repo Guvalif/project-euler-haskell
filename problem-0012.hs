@@ -1,3 +1,4 @@
+import Control.Arrow ((&&&))
 import Data.List (group)
 
 
@@ -18,7 +19,7 @@ nthTriangle :: Integer -> Integer
 nthTriangle n = (n * (n + 1)) `div` 2
 
 
-answer = fst . head $ dropWhile ((< 500) . snd) $ map (\n -> (n, divisors n)) $ map nthTriangle [ 1 .. ]
+answer = fst . head $ dropWhile ((< 500) . snd) $ map ((id &&& divisors) . nthTriangle) [ 1 .. ]
 
 
 -- Application Entry Point
