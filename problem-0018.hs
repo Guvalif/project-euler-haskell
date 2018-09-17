@@ -2,17 +2,16 @@ pairwise :: [Integer] -> [[Integer]]
 pairwise xs =
     let
         pairwise' ys = case ys of
-            []            -> [[]]
-            [ y ]         -> [[ y ]]
             y0 : y1 : ys' -> [[ y0, y1 ]] ++ pairwise' (y1 : ys')
+            _             -> []
     in
-        filter ((== 2) . length) $ pairwise' xs
+        pairwise' xs
 
 
 addValuesToPairs :: [[Integer]] -> [[Integer]] -> [[Integer]]
 addValuesToPairs values pairs =
     let
-        values' = map (\v -> [ v, v ]) $ concat values
+        values' = map (\x -> [ x, x ]) $ concat values
         next    = zipWith (zipWith (+)) values' pairs
 
         merge xs xs'
