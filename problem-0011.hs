@@ -1,4 +1,5 @@
 import Control.Monad (sequence)
+import Data.Maybe (fromMaybe)
 
 
 grid = [
@@ -58,15 +59,7 @@ slash4_products     = map (productM . (uncurry slash4)) points
 backslash4_products = map (productM . (uncurry backslash4)) points
 
 products4 = down4_products ++ right4_products ++ slash4_products ++ backslash4_products
-
-
-unlift :: Maybe Integer -> Integer
-unlift x = case x of
-    Just n -> n
-    _      -> 0
-
-
-answer = maximum $ map unlift products4
+answer    = maximum $ map (fromMaybe 0) products4
 
 
 -- Application Entry Point
