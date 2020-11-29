@@ -10,8 +10,10 @@ primes =
     in
         f [ 2 .. ]
 
+
 primeFactors :: Integer -> [Integer]
 primeFactors n = [ x | x <- takeWhile (\y -> y * y <= n) primes, n `mod` x == 0 ]
+
 
 factorize :: Integer -> [Integer]
 factorize 1 = []
@@ -23,11 +25,14 @@ factorize n =
     in
         x : factorize (n `div` x)
 
+
 powers :: [Integer] -> [Integer]
 powers = foldr (\x -> \acc -> head acc * x : acc) [ 1 ]
 
+
 factors :: Integer -> [Integer]
 factors = foldr (liftA2 (*)) [ 1 ] . fmap powers . group . factorize
+
 
 isAbundantNumber :: Integer -> Maybe Integer
 isAbundantNumber n =
@@ -37,6 +42,7 @@ isAbundantNumber n =
     in
         if s <= n then Nothing else Just n
 
+-- Application Entry Point
 main :: IO ()
 main = do
     let abundants               = catMaybes . fmap isAbundantNumber $ [ 1 .. 28123 ]
